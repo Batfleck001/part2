@@ -8,9 +8,13 @@ import Content from './Content'
 const Course = (props) => {
     return (
         <div>
-          <Header course = {props.course.name} />
-          <Content parts={props.course.parts}/>
-          <Footer parts={props.course.parts} />
+          {props.course.map(val => (
+            <div>
+              <Header course = {val.name} />
+              <Content parts={val.parts}/>
+              <Footer parts={val.parts} />
+            </div>
+          ))}
         </div>
       )
 }
