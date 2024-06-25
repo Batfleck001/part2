@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import personService from '../service/Persons.js'
 const PersonForm = (props) => {
 
   const [newName, setnewName] = useState('')
@@ -9,16 +9,17 @@ const PersonForm = (props) => {
     event.preventDefault()
 
     const find = props.persons.find(val => val.name.toLowerCase() === newName.toLowerCase())
-    if(find){
-      alert(`${newName} is already added to the phonebook`)
+    if(!find){
+      const newpersonObject = {
+        name : newName,
+        number: newNumber
+      }
+      personService.create(newpersonObject)
+      .then(val => props.setpersons(props.persons.concat(val)))
+      
     }
     else{
-      const newpersonObject = {
-      name : newName,
-      number: newNumber,
-      id: props.persons.length+1
-    }
-    props.setpersons(props.persons.concat(newpersonObject))
+      alert(`${newName} is already added to the phonebook`)
   }
   setnewName('')
   setnewNumber(0)
