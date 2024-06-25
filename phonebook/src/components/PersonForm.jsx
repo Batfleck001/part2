@@ -8,8 +8,8 @@ const PersonForm = (props) => {
   const addPerson = (event) =>{
     event.preventDefault()
 
-    const find = props.persons.find(val => val.name.toLowerCase() === newName.toLowerCase())
-    if(!find){
+    const found = props.persons.find(val => val.name.toLowerCase() === newName.toLowerCase())
+    if(!found){
       const newpersonObject = {
         name : newName,
         number: newNumber
@@ -19,7 +19,12 @@ const PersonForm = (props) => {
       
     }
     else{
-      alert(`${newName} is already added to the phonebook`)
+      if(confirm(`${found.name} is already added to the phonebook, replace old number with new one ?`)){
+        const Changed = {...found, number : newNumber}
+        personService
+        .update(found.id , Changed)
+        .then(res => props.setpersons(props.persons.map(n => n.id === found.id ? Changed : n)))
+      }
   }
   setnewName('')
   setnewNumber(0)
