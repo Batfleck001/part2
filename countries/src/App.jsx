@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
+import Filter from "./components/Filter"
+import Country from "./components/Country"
 
 const App = () =>{
 
@@ -18,9 +20,13 @@ const App = () =>{
       })
     }
     },[name])
+    
   const handleChange = (event) =>{
     const search = event.target.value
     const filtered = search ? countries.filter(val => val.name.common.toLowerCase().includes(search.toLowerCase())) : []
+    if(name.length === 0){
+      setcountrydetail([])
+    }
     if(filtered.length === 1){
       setresult([])
       setname(filtered[0].name.common)
@@ -29,28 +35,16 @@ const App = () =>{
     setresult(filtered)
     }
   }
-
+  const toggleShow = (val) => {
+    setcountrydetail([val])
+    setresult([])
+  }
 
   return(
     <div>
       find countries<input onChange={handleChange}/>
-      <ul>
-      {result.map(val => (
-        <li>{val.name.common}</li>
-      ))}</ul>
-      {countrydetail.map((val) => (<div>
-        <h1>{val.name.common}</h1>
-        <p>capital {val.capital[0]}</p>
-        <p>area {val.area}</p>
-        <h3>Languages</h3>
-        <ul>
-          {Object.entries(val.languages).map(([key,value]) => (
-            <li>{value}</li>
-          ))}
-        </ul>
-        <br/>
-        <img src={val.flags.png}></img>
-      </div>))}
+      <Filter result={result} toggleShow = {toggleShow}/>
+      <Country countrydetail={countrydetail}/>
     </div>
   )
 }
