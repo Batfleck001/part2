@@ -24,9 +24,6 @@ const App = () =>{
   const handleChange = (event) =>{
     const search = event.target.value
     const filtered = search ? countries.filter(val => val.name.common.toLowerCase().includes(search.toLowerCase())) : []
-    if(result.length === 0){
-      setcountrydetail([])
-    }
     if(filtered.length === 1){
       setresult([])
       setname(filtered[0].name.common)
