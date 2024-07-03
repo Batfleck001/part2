@@ -4,7 +4,6 @@ import PersonForm from './components/PersonForm'
 import Number from './components/Number'
 import personService from  './service/Persons'
 import Notification from './components/Notification'
-import Error from './components/Error'
 import './index.css'
 
 const App = () => {
