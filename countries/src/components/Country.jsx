@@ -1,6 +1,11 @@
 import React from 'react'
 
 const Country = (props) => {
+
+  const border ={
+    border : '1px solid black '
+  }
+
   return (
     <div>
         {props.countrydetail.map((val) => (<div>
@@ -14,7 +19,7 @@ const Country = (props) => {
           ))}
         </ul>
         <br/>
-        <img src={val.flags.png}></img>
+        <img src={val.flags.png} style={border}></img>
       </div>))}
     </div>
   )
