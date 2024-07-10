@@ -10,7 +10,7 @@ const Forecast = (props) => {
         <h1>Weather in {props.capital}</h1>
         <p>temperature {(val.main.temp-273.15).toFixed(2)} Celcius</p>
         <img src={img} alt="" />
-        <p>wind {val.wind.speed}</p>
+        <p>wind {val.wind.speed} m/s</p>
         </>
     )})}</div>
   )
