@@ -97,7 +97,13 @@ const ErrorStyle = {
       personService
       .remove(id)
       .then(res => setpersons(persons.filter(n => n.id !== res.id)))
-      .catch(err => console.log(err))
+      .catch(err => {
+        setpersonname(`Information of ${contact.name} is already remove from the server`)
+        setstyle(ErrorStyle)
+        setTimeout(() => {
+          setpersonname(null)
+          setstyle(null)
+        },5000)})
     }
     }
 
